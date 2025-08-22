@@ -48,15 +48,6 @@ public interface IAIModelService
 }
 
 /// <summary>
-/// Domain service for configuration management
-/// </summary>
-public interface IConfigurationService
-{
-    Task<AppSettings> GetSettingsAsync();
-    Task SaveSettingsAsync(AppSettings settings);
-}
-
-/// <summary>
 /// Model information
 /// </summary>
 public class ModelInfo
@@ -67,20 +58,4 @@ public class ModelInfo
     public bool IsLoaded { get; set; }
     public DateTime? LoadedDate { get; set; }
     public long MemoryUsage { get; set; }
-}
-
-/// <summary>
-/// Application settings
-/// </summary>
-public class AppSettings
-{
-    public string AIModelPath { get; set; } = string.Empty;
-    public string DamApiBaseUrl { get; set; } = string.Empty;
-    public string DamApiKey { get; set; } = string.Empty;
-    public int BatchSize { get; set; } = 10;
-    public int MaxConcurrentProcessing { get; set; } = 3;
-    public string DefaultQuestion { get; set; } = "What is this image?";
-    public bool AutoSaveToDam { get; set; } = false;
-    public string OutputFormat { get; set; } = "JSON";
-    public string LogLevel { get; set; } = "Information";
 }

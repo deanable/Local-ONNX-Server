@@ -60,8 +60,10 @@ internal static class Program
         var defaultSettings = new AppSettings
         {
             AIModelPath = string.Empty,
-            DamApiBaseUrl = "http://localhost:8080",
-            DamApiKey = string.Empty,
+            DamApiBaseUrl = "https://test.daminion.net", // Default Daminion test server
+            DamUsername = "admin", // Default username
+            DamPassword = "admin", // Default password
+            DamApiKey = string.Empty, // Legacy field
             BatchSize = 10,
             MaxConcurrentProcessing = 3,
             DefaultQuestion = "What is this image?",

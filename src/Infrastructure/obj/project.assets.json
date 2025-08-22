@@ -1455,11 +1455,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
+      "projectUniqueName": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
       "projectName": "ImageTagging.Infrastructure",
-      "projectPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
+      "projectPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Dean Kruger\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\obj\\",
+      "outputPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1480,8 +1480,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
-              "projectPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj"
+            "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
+              "projectPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj"
             }
           }
         }

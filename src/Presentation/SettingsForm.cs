@@ -26,12 +26,13 @@ public partial class SettingsForm : Form
 
         var mainPanel = new TableLayoutPanel
         {
-            RowCount = 7,
+            RowCount = 8,
             ColumnCount = 2,
             Dock = DockStyle.Fill,
             Padding = new Padding(10)
         };
 
+        mainPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
         mainPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
         mainPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
         mainPanel.RowStyles.Add(new RowStyle(SizeType.Absolute, 30));
@@ -83,21 +84,36 @@ public partial class SettingsForm : Form
         var damUrlTextBox = new TextBox
         {
             Dock = DockStyle.Fill,
-            PlaceholderText = "http://localhost:8080"
+            PlaceholderText = "https://test.daminion.net"
         };
 
-        // DAM API Key
-        var damKeyLabel = new Label
+        // DAM Username
+        var damUsernameLabel = new Label
         {
-            Text = "DAM API Key:",
+            Text = "DAM Username:",
             TextAlign = ContentAlignment.MiddleRight,
             Dock = DockStyle.Fill
         };
 
-        var damKeyTextBox = new TextBox
+        var damUsernameTextBox = new TextBox
         {
             Dock = DockStyle.Fill,
-            PasswordChar = '*'
+            PlaceholderText = "admin"
+        };
+
+        // DAM Password
+        var damPasswordLabel = new Label
+        {
+            Text = "DAM Password:",
+            TextAlign = ContentAlignment.MiddleRight,
+            Dock = DockStyle.Fill
+        };
+
+        var damPasswordTextBox = new TextBox
+        {
+            Dock = DockStyle.Fill,
+            PasswordChar = '*',
+            PlaceholderText = "Enter password"
         };
 
         // Batch Size
@@ -148,13 +164,15 @@ public partial class SettingsForm : Form
         mainPanel.Controls.Add(modelPathPanel, 1, 0);
         mainPanel.Controls.Add(damUrlLabel, 0, 1);
         mainPanel.Controls.Add(damUrlTextBox, 1, 1);
-        mainPanel.Controls.Add(damKeyLabel, 0, 2);
-        mainPanel.Controls.Add(damKeyTextBox, 1, 2);
-        mainPanel.Controls.Add(batchSizeLabel, 0, 3);
-        mainPanel.Controls.Add(batchSizeNumeric, 1, 3);
-        mainPanel.Controls.Add(maxConcurrentLabel, 0, 4);
-        mainPanel.Controls.Add(maxConcurrentNumeric, 1, 4);
-        mainPanel.Controls.Add(buttonPanel, 1, 6);
+        mainPanel.Controls.Add(damUsernameLabel, 0, 2);
+        mainPanel.Controls.Add(damUsernameTextBox, 1, 2);
+        mainPanel.Controls.Add(damPasswordLabel, 0, 3);
+        mainPanel.Controls.Add(damPasswordTextBox, 1, 3);
+        mainPanel.Controls.Add(batchSizeLabel, 0, 4);
+        mainPanel.Controls.Add(batchSizeNumeric, 1, 4);
+        mainPanel.Controls.Add(maxConcurrentLabel, 0, 5);
+        mainPanel.Controls.Add(maxConcurrentNumeric, 1, 5);
+        mainPanel.Controls.Add(buttonPanel, 1, 7);
 
         this.Controls.Add(mainPanel);
 
@@ -163,7 +181,8 @@ public partial class SettingsForm : Form
         {
             ModelPathTextBox = modelPathTextBox,
             DamUrlTextBox = damUrlTextBox,
-            DamKeyTextBox = damKeyTextBox,
+            DamUsernameTextBox = damUsernameTextBox,
+            DamPasswordTextBox = damPasswordTextBox,
             BatchSizeNumeric = batchSizeNumeric,
             MaxConcurrentNumeric = maxConcurrentNumeric,
             SaveButton = saveButton,
@@ -180,7 +199,8 @@ public partial class SettingsForm : Form
 
             components.ModelPathTextBox.Text = _settings.AIModelPath;
             components.DamUrlTextBox.Text = _settings.DamApiBaseUrl;
-            components.DamKeyTextBox.Text = _settings.DamApiKey;
+            components.DamUsernameTextBox.Text = _settings.DamUsername;
+            components.DamPasswordTextBox.Text = _settings.DamPassword;
             components.BatchSizeNumeric.Value = _settings.BatchSize;
             components.MaxConcurrentNumeric.Value = _settings.MaxConcurrentProcessing;
         }
@@ -198,7 +218,8 @@ public partial class SettingsForm : Form
 
             _settings.AIModelPath = components.ModelPathTextBox.Text;
             _settings.DamApiBaseUrl = components.DamUrlTextBox.Text;
-            _settings.DamApiKey = components.DamKeyTextBox.Text;
+            _settings.DamUsername = components.DamUsernameTextBox.Text;
+            _settings.DamPassword = components.DamPasswordTextBox.Text;
             _settings.BatchSize = (int)components.BatchSizeNumeric.Value;
             _settings.MaxConcurrentProcessing = (int)components.MaxConcurrentNumeric.Value;
 
@@ -217,7 +238,8 @@ public partial class SettingsForm : Form
     {
         public required TextBox ModelPathTextBox { get; set; }
         public required TextBox DamUrlTextBox { get; set; }
-        public required TextBox DamKeyTextBox { get; set; }
+        public required TextBox DamUsernameTextBox { get; set; }
+        public required TextBox DamPasswordTextBox { get; set; }
         public required NumericUpDown BatchSizeNumeric { get; set; }
         public required NumericUpDown MaxConcurrentNumeric { get; set; }
         public required Button SaveButton { get; set; }

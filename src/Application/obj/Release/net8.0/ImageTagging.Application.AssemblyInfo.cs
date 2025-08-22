@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ImageTagging.Application")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+222647affb0c4eac24f964b0fa8d3c81382b4538")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f279ca79f4f2e35360468faa0f49e089de34dc48")]
 [assembly: System.Reflection.AssemblyProductAttribute("ImageTagging.Application")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ImageTagging.Application")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

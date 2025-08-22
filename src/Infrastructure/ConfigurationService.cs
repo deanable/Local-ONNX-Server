@@ -1,18 +1,22 @@
 using ImageTagging.Domain;
-using System.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
 namespace ImageTagging.Infrastructure;
 
 /// <summary>
-/// Configuration service implementation
+/// Configuration service for managing application settings
 /// </summary>
 public class ConfigurationService : IConfigurationService
 {
+    private readonly ILogger<ConfigurationService> _logger;
     private readonly string _configFilePath;
+    private AppSettings? _cachedSettings;
 
-    public ConfigurationService(string configFilePath = "appsettings.json")
+    public ConfigurationService(ILogger<ConfigurationService> logger)
     {
-        _configFilePath = configFilePath;
+        _logger = logger;
+        _configFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "appsettings.json");
     }
 
     /// <summary>
@@ -20,53 +24,70 @@ public class ConfigurationService : IConfigurationService
     /// </summary>
     public async Task<AppSettings> GetSettingsAsync()
     {
+        if (_cachedSettings != null)
+        {
+            return _cachedSettings;
+        }
+
         try
         {
-            if (!File.Exists(_configFilePath))
+            if (File.Exists(_configFilePath))
             {
-                return GetDefaultSettings();
+                var json = await File.ReadAllTextAsync(_configFilePath);
+                _cachedSettings = JsonSerializer.Deserialize<AppSettings>(json) ?? CreateDefaultSettings();
+            }
+            else
+            {
+                _cachedSettings = CreateDefaultSettings();
+                await SaveSettingsAsync(_cachedSettings);
             }
 
-            var json = await File.ReadAllTextAsync(_configFilePath);
-            var settings = System.Text.Json.JsonSerializer.Deserialize<AppSettings>(json);
-
-            return settings ?? GetDefaultSettings();
+            return _cachedSettings;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return GetDefaultSettings();
+            _logger.LogError(ex, "Error loading settings from {ConfigFilePath}", _configFilePath);
+            return CreateDefaultSettings();
         }
     }
 
     /// <summary>
     /// Save application settings
     /// </summary>
-    public async Task SaveSettingsAsync(AppSettings settings)
+    public async Task<bool> SaveSettingsAsync(AppSettings settings)
     {
         try
         {
-            var json = System.Text.Json.JsonSerializer.Serialize(settings, new System.Text.Json.JsonSerializerOptions
+            var options = new JsonSerializerOptions
             {
                 WriteIndented = true
-            });
+            };
 
+            var json = JsonSerializer.Serialize(settings, options);
             await File.WriteAllTextAsync(_configFilePath, json);
+
+            _cachedSettings = settings;
+            _logger.LogInformation("Settings saved successfully to {ConfigFilePath}", _configFilePath);
+            return true;
         }
         catch (Exception ex)
         {
-            throw new InvalidOperationException("Failed to save application settings", ex);
+            _logger.LogError(ex, "Error saving settings to {ConfigFilePath}", _configFilePath);
+            return false;
         }
     }
 
     /// <summary>
-    /// Get default application settings
+    /// Create default settings
     /// </summary>
-    private AppSettings GetDefaultSettings()
+    private static AppSettings CreateDefaultSettings()
     {
         return new AppSettings
         {
             AIModelPath = string.Empty,
-            DamApiBaseUrl = "http://localhost:8080",
+            DamApiBaseUrl = "https://test.daminion.net",
+            DamUsername = "admin",
+            DamPassword = "admin",
             DamApiKey = string.Empty,
             BatchSize = 10,
             MaxConcurrentProcessing = 3,

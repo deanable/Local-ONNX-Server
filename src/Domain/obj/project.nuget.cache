@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jyOmAZ7zpmc=",
+  "dgSpecHash": "b0r0jLvPM0Q=",
   "success": true,
-  "projectFilePath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -26,7 +26,7 @@ public static class DependencyInjection
             var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
             var httpClient = httpClientFactory.CreateClient();
             var logger = provider.GetRequiredService<ILogger<DamServices.DamIntegrationService>>();
-            return new DamServices.DamIntegrationService(httpClient, logger, settings.DamApiBaseUrl, settings.DamApiKey);
+            return new DamServices.DamIntegrationService(httpClient, logger, settings.DamApiBaseUrl, settings.DamUsername, settings.DamPassword);
         });
 
         // Register configuration service

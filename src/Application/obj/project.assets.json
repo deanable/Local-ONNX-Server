@@ -58,8 +58,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
-              "projectPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj"
+            "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
+              "projectPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj"
             }
           }
         }
