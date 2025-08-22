@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj": {}
+    "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
+    "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj",
+        "projectUniqueName": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj",
         "projectName": "ImageTagging.Domain",
-        "projectPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj",
+        "projectPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj",
         "packagesPath": "C:\\Users\\Dean Kruger\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\obj\\",
+        "outputPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -69,14 +69,14 @@
         }
       }
     },
-    "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj": {
+    "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
+        "projectUniqueName": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
         "projectName": "ImageTagging.Infrastructure",
-        "projectPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
+        "projectPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\ImageTagging.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Dean Kruger\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\obj\\",
+        "outputPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -97,8 +97,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
-                "projectPath": "C:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj"
+              "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj": {
+                "projectPath": "c:\\Users\\Dean Kruger\\source\\repos\\deanable\\Local ONNX Server\\src\\Domain\\ImageTagging.Domain.csproj"
               }
             }
           }
@@ -136,6 +136,10 @@
               "version": "[13.0.3, )"
             },
             "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.Drawing.Common": {
               "target": "Package",
               "version": "[8.0.0, )"
             }
