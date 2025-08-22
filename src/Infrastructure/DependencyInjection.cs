@@ -1,5 +1,6 @@
 using ImageTagging.Domain;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Http;
 using Microsoft.Extensions.Logging;
 
 namespace ImageTagging.Infrastructure;
@@ -19,17 +20,17 @@ public static class DependencyInjection
         services.AddSingleton<IAIModelService, AIServices.PhiVisionService>();
 
         // Register DAM services
-        services.AddHttpClient<IDamIntegrationService, DamServices.DamIntegrationService>((provider, client) =>
+        services.AddHttpClient<DamServices.DamIntegrationService>();
+        services.AddScoped<IDamIntegrationService>(provider =>
         {
+            var httpClientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            var httpClient = httpClientFactory.CreateClient();
             var logger = provider.GetRequiredService<ILogger<DamServices.DamIntegrationService>>();
-            return new DamServices.DamIntegrationService(client, logger, settings.DamApiBaseUrl, settings.DamApiKey);
+            return new DamServices.DamIntegrationService(httpClient, logger, settings.DamApiBaseUrl, settings.DamApiKey);
         });
 
         // Register configuration service
         services.AddSingleton<IConfigurationService, ConfigurationService>();
-
-        // Register batch processing service
-        services.AddTransient<IBatchProcessingService, BatchProcessingService>();
 
         return services;
     }

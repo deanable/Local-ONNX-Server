@@ -12,7 +12,7 @@ public partial class MainForm : Form
     private readonly IConfigurationService _configurationService;
     private readonly ILogger<MainForm> _logger;
 
-    private Image? _currentImage;
+    private ImageTagging.Domain.Image? _currentImage;
     private CancellationTokenSource? _cancellationTokenSource;
 
     public MainForm(
@@ -47,7 +47,7 @@ public partial class MainForm : Form
 
         settingsMenu.Click += SettingsMenu_Click;
 
-        fileMenu.DropDownItems.Add("Exit", null, (s, e) => Application.Exit());
+        fileMenu.DropDownItems.Add("Exit", null, (s, e) => System.Windows.Forms.Application.Exit());
         settingsMenu.DropDownItems.Add("Preferences", null, SettingsMenu_Click);
 
         menuStrip.Items.Add(fileMenu);
@@ -299,7 +299,7 @@ public partial class MainForm : Form
             {
                 var item = new ListViewItem(image.FileName);
                 item.SubItems.Add(image.DamAssetId);
-                item.SubItems.Add(image.AnalysisStatus);
+                item.SubItems.Add(image.ProcessingStatus);
                 item.Tag = image;
                 components.DamListView.Items.Add(item);
             }
@@ -318,7 +318,7 @@ public partial class MainForm : Form
         if (sender is ListView listView && listView.SelectedItems.Count > 0)
         {
             var selectedItem = listView.SelectedItems[0];
-            if (selectedItem.Tag is Image image)
+            if (selectedItem.Tag is ImageTagging.Domain.Image image)
             {
                 _currentImage = image;
                 LoadImageFromDam(image);
@@ -333,7 +333,7 @@ public partial class MainForm : Form
 
         try
         {
-            _currentImage = new Image
+            _currentImage = new ImageTagging.Domain.Image
             {
                 FileName = Path.GetFileName(imagePath),
                 FilePath = imagePath,
@@ -357,7 +357,7 @@ public partial class MainForm : Form
         }
     }
 
-    private async void LoadImageFromDam(Image image)
+    private async void LoadImageFromDam(ImageTagging.Domain.Image image)
     {
         var components = (UIComponents)this.Tag;
 

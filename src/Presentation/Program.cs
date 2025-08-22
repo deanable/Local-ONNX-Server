@@ -42,7 +42,7 @@ internal static class Program
         }
 
         // Run the application
-        Application.Run(serviceProvider.GetRequiredService<MainForm>());
+        System.Windows.Forms.Application.Run(serviceProvider.GetRequiredService<MainForm>());
     }
 
     private static ServiceProvider ConfigureServices()
@@ -78,7 +78,6 @@ internal static class Program
 
         // Add presentation layer services
         services.AddTransient<MainForm>();
-        services.AddTransient<ImageDetailsForm>();
         services.AddTransient<SettingsForm>();
 
         return services.BuildServiceProvider();

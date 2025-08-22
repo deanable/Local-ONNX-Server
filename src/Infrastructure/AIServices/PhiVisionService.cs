@@ -1,4 +1,5 @@
 using ImageTagging.Domain;
+using Microsoft.Extensions.Logging;
 using Microsoft.ML.OnnxRuntimeGenAI;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -96,20 +97,20 @@ public class PhiVisionService : IImageProcessingService, IAIModelService
     /// <summary>
     /// Process an image from file path
     /// </summary>
-    public async Task<Image> ProcessImageAsync(string imagePath, CancellationToken cancellationToken = default)
+    public async Task<ImageTagging.Domain.Image> ProcessImageAsync(string imagePath, CancellationToken cancellationToken = default)
     {
         if (!_isInitialized || _model == null || _processor == null || _tokenizerStream == null)
         {
             throw new InvalidOperationException("Model not initialized");
         }
 
-        var image = new Image
+        var image = new ImageTagging.Domain.Image
         {
             FileName = Path.GetFileName(imagePath),
             FilePath = imagePath,
             ContentType = GetContentType(imagePath),
             FileSize = new FileInfo(imagePath).Length,
-            AnalysisStatus = AnalysisStatus.Processing
+            ProcessingStatus = AnalysisStatus.Processing
         };
 
         try
@@ -132,7 +133,7 @@ public class PhiVisionService : IImageProcessingService, IAIModelService
                 image.Tags.Add(tag);
             }
 
-            image.AnalysisStatus = AnalysisStatus.Completed;
+            image.ProcessingStatus = AnalysisStatus.Completed;
             image.AnalyzedDate = DateTime.UtcNow;
             image.AnalyzedBy = "Phi-3.5 Vision";
 
@@ -140,7 +141,7 @@ public class PhiVisionService : IImageProcessingService, IAIModelService
         }
         catch (Exception ex)
         {
-            image.AnalysisStatus = AnalysisStatus.Failed;
+            image.ProcessingStatus = AnalysisStatus.Failed;
             _logger.LogError(ex, "Failed to process image: {FileName}", image.FileName);
             throw;
         }
@@ -151,7 +152,7 @@ public class PhiVisionService : IImageProcessingService, IAIModelService
     /// <summary>
     /// Process an image from stream
     /// </summary>
-    public async Task<Image> ProcessImageAsync(Stream imageStream, string fileName, CancellationToken cancellationToken = default)
+    public async Task<ImageTagging.Domain.Image> ProcessImageAsync(Stream imageStream, string fileName, CancellationToken cancellationToken = default)
     {
         // Save stream to temporary file for processing
         var tempPath = Path.Combine(Path.GetTempPath(), $"temp_{Guid.NewGuid()}_{fileName}");
@@ -188,9 +189,9 @@ public class PhiVisionService : IImageProcessingService, IAIModelService
             throw new InvalidOperationException("Model not initialized");
         }
 
-        var images = Images.Load([imagePath]);
+        var images = Images.Load(imagePath);
         var prompt = $"<|user|>\n<|image_1|>\n{question}<|end|>\n<|assistant|>\n";
-        string[] stopTokens = ["</s>", "<|user|>", "<|end|>", "<|assistant|>"];
+        string[] stopTokens = new string[] { "</s>", "<|user|>", "<|end|>", "<|assistant|>" };
 
         var inputTensors = _processor.ProcessImages(prompt, images);
 
@@ -249,7 +250,7 @@ public class PhiVisionService : IImageProcessingService, IAIModelService
 
         // Simple keyword extraction - split by common delimiters and filter
         var words = description
-            .Split([' ', ',', '.', ';', ':', '\n'], StringSplitOptions.RemoveEmptyEntries)
+            .Split(new char[] { ' ', ',', '.', ';', ':', '\n' }, StringSplitOptions.RemoveEmptyEntries)
             .Select(w => w.Trim().ToLower())
             .Where(w => w.Length > 3) // Filter out very short words
             .Distinct()

@@ -1,4 +1,5 @@
 using ImageTagging.Domain;
+using Microsoft.Extensions.Logging;
 using System.Net.Http.Json;
 using System.Text.Json;
 
@@ -146,7 +147,7 @@ public class DamIntegrationService : IDamIntegrationService
                 tags = image.Tags.Select(t => t.Name).ToArray(),
                 analyzedBy = image.AnalyzedBy,
                 analyzedDate = image.AnalyzedDate,
-                analysisStatus = image.AnalysisStatus,
+                analysisStatus = image.ProcessingStatus,
                 width = image.Width,
                 height = image.Height,
                 fileSize = image.FileSize
@@ -189,14 +190,15 @@ public class DamIntegrationService : IDamIntegrationService
             Width = asset.Width ?? 0,
             Height = asset.Height ?? 0,
             Description = asset.Metadata?.Description ?? string.Empty,
-            Tags = asset.Tags?.Select(t => new Tag
-            {
-                Name = t,
-                Category = "DAM",
-                Source = "DAM",
-                CreatedBy = "DAM System"
-            }).ToObservableCollection() ?? new System.Collections.ObjectModel.ObservableCollection<Tag>(),
-            AnalysisStatus = string.IsNullOrEmpty(asset.Metadata?.AnalysisStatus) ? AnalysisStatus.Pending : asset.Metadata.AnalysisStatus,
+            Tags = new System.Collections.ObjectModel.ObservableCollection<Tag>(
+                asset.Tags?.Select(t => new Tag
+                {
+                    Name = t,
+                    Category = "DAM",
+                    Source = "DAM",
+                    CreatedBy = "DAM System"
+                }) ?? Enumerable.Empty<Tag>()),
+            ProcessingStatus = string.IsNullOrEmpty(asset.Metadata?.AnalysisStatus) ? AnalysisStatus.Pending : asset.Metadata.AnalysisStatus,
             AnalyzedDate = asset.Metadata?.AnalyzedDate,
             AnalyzedBy = asset.Metadata?.AnalyzedBy ?? string.Empty
         };

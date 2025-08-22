@@ -56,7 +56,7 @@ public class ImageProcessingService
             // Update the original image with AI results
             image.Description = processedImage.Description;
             image.Tags = processedImage.Tags;
-            image.AnalysisStatus = processedImage.AnalysisStatus;
+            image.ProcessingStatus = processedImage.ProcessingStatus;
             image.AnalyzedDate = processedImage.AnalyzedDate;
 
             return ImageProcessingResult.Success(image);

@@ -27,7 +27,7 @@ public class Image
     // AI Analysis results
     public string Description { get; set; } = string.Empty;
     public ObservableCollection<Tag> Tags { get; set; } = new();
-    public string AnalysisStatus { get; set; } = AnalysisStatus.Pending;
+    public string ProcessingStatus { get; set; } = AnalysisStatus.Pending;
     public DateTime? AnalyzedDate { get; set; }
     public string AnalyzedBy { get; set; } = string.Empty;
 
@@ -60,7 +60,7 @@ public class ImageBatch
     public string Description { get; set; } = string.Empty;
     public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
     public string CreatedBy { get; set; } = string.Empty;
-    public BatchStatus Status { get; set; } = BatchStatus.Created;
+    public string Status { get; set; } = BatchStatus.Created;
     public int TotalImages { get; set; }
     public int ProcessedImages { get; set; }
     public int FailedImages { get; set; }
